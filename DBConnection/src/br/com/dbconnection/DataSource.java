@@ -3,21 +3,20 @@ package br.com.dbconnection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.DatabaseMetaData;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.PreparedStatement;
+import java.sql.Statement;
 
 public class DataSource {
-	private Connection connection;
+	private java.sql.Connection connection;
 
 	public DataSource() {
 
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			Class.forName("com.mysql.cj.jdbc.Driver");
 			connection = (Connection) DriverManager
-					.getConnection("jdbc:mysql://localhost:3306/fabricacafe?useSSL=false", "root", "123456");
+					.getConnection("jdbc:mysql://localhost:3306/cafeteria?allowPublicKeyRetrieval=true&useSSL=false", "root", "159753");
 			System.out.println("Conexão estabelecida!!");
 		} catch (ClassNotFoundException cnfe) {
 			System.out.println("Erro Driver Jdbc!" + cnfe.getLocalizedMessage());
@@ -82,7 +81,7 @@ public class DataSource {
 		prep.executeBatch();
 		connection.setAutoCommit(true);
 
-		connection.close();
+		
 	}
 
 	public void alteraRegistro(int codigo, Double custo) throws SQLException {
